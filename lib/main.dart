@@ -1,3 +1,4 @@
+import 'package:event_fit/config/theme/config_theme.dart';
 import 'package:event_fit/presentation/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,12 +21,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'EventFit',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        primarySwatch: Colors.green,
-      ),
+      theme: AppTheme(selectedColor: 3).theme(),
       home: const MyHomePage(title: 'EventFit'),
     );
   }
@@ -43,11 +40,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: const Center(
+    return const Scaffold(
+      body: Center(
         child: Homescreen(),
       ),
     );
