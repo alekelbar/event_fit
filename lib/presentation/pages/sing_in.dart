@@ -1,5 +1,6 @@
 import 'package:event_fit/presentation/common/widgets/reusable_widget.dart';
 import 'package:event_fit/presentation/pages/home.dart';
+import 'package:event_fit/presentation/pages/opt.dart';
 import 'package:event_fit/presentation/pages/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -90,8 +91,8 @@ class _SingInScreenState extends State<SingInScreen> {
           style: TextStyle(color: Colors.white70)),
       GestureDetector(
         onTap: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => const SingUp()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const OtpPage()));
         },
         child: const Text(
           " Sing Up ",
