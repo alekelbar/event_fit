@@ -8,20 +8,23 @@ class Homescreen extends StatelessWidget {
     return MaterialApp(
       title: 'Mapa',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorSchemeSeed: Colors.blue,
       ),
-      home: MapScreen(),
+      home: const MapScreen(),
     );
   }
 }
 
 class MapScreen extends StatefulWidget {
+  const MapScreen({super.key});
+
   @override
-  _MapScreenState createState() => _MapScreenState();
+  MapScreenState createState() => MapScreenState();
 }
 
-class _MapScreenState extends State<MapScreen> {
-  Set<Marker> _markers = {};
+class MapScreenState extends State<MapScreen> {
+  final Set<Marker> _markers = {};
+
   String _evento = '';
   String _nombre = ''; //meter en base de datos
   String _horaSalida = '';
@@ -31,34 +34,58 @@ class _MapScreenState extends State<MapScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Nuevo market'),
+        title: const Text('Nuevo market'),
         content: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                decoration: InputDecoration(labelText: 'Evento'),
-                onChanged: (value) => _evento = value,
-              ),
-              TextField(
-                decoration: InputDecoration(labelText: 'Nombre'),
-                onChanged: (value) => _nombre = value,
-              ),
-              TextField(
-                decoration: InputDecoration(labelText: 'Hora de salida'),
-                onChanged: (value) => _horaSalida = value,
-              ),
-              TextField(
-                decoration: InputDecoration(labelText: 'Tiempo estimado'),
-                onChanged: (value) => _tiempoEstimado = value,
-              ),
-            ],
+          child: Form(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  child: TextFormField(
+                    decoration: const InputDecoration(labelText: 'Evento'),
+                    onChanged: (value) => _evento = value,
+                    style: Theme.of(context).textTheme.bodySmall,
+                    keyboardType: TextInputType.text,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                SizedBox(
+                  child: TextFormField(
+                    decoration: const InputDecoration(labelText: 'Nombre'),
+                    onChanged: (value) => _nombre = value,
+                    style: Theme.of(context).textTheme.bodySmall,
+                    keyboardType: TextInputType.text,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                SizedBox(
+                  child: TextFormField(
+                    decoration:
+                        const InputDecoration(labelText: 'Hora de salida'),
+                    onChanged: (value) => _horaSalida = value,
+                    style: Theme.of(context).textTheme.bodySmall,
+                    keyboardType: TextInputType.text,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                SizedBox(
+                  child: TextFormField(
+                    decoration:
+                        const InputDecoration(labelText: 'Tiempo estimado'),
+                    onChanged: (value) => _tiempoEstimado = value,
+                    style: Theme.of(context).textTheme.bodySmall,
+                    keyboardType: TextInputType.text,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text('Cancelar'),
+            child: const Text('Cancelar'),
           ),
           TextButton(
             onPressed: () {
@@ -77,11 +104,11 @@ class _MapScreenState extends State<MapScreen> {
                       showModalBottomSheet(
                         context: context,
                         builder: (context) => Container(
+                          padding: const EdgeInsets.all(16.0),
                           child: Text(
                             '$_nombre\n$_evento\nSalida: $_horaSalida\nTiempo estimado: $_tiempoEstimado',
-                            style: TextStyle(fontSize: 18.0),
+                            style: const TextStyle(fontSize: 18.0),
                           ),
-                          padding: EdgeInsets.all(16.0),
                         ),
                       );
                     },
@@ -90,7 +117,7 @@ class _MapScreenState extends State<MapScreen> {
               });
               Navigator.of(context).pop();
             },
-            child: Text('Agregar'),
+            child: const Text('Agregar'),
           ),
         ],
       ),
@@ -101,10 +128,10 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Mapa'),
+        title: const Text('Mapa'),
       ),
       body: GoogleMap(
-        initialCameraPosition: CameraPosition(
+        initialCameraPosition: const CameraPosition(
           target: LatLng(8.648997, -82.9436183),
           zoom: 13,
         ),

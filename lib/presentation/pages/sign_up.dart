@@ -1,6 +1,5 @@
 import 'package:event_fit/presentation/common/widgets/reusable_widget.dart';
 import 'package:event_fit/presentation/pages/home.dart';
-import 'package:event_fit/presentation/pages/opt.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../common/helpers/color.dart';

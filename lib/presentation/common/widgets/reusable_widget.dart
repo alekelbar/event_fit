@@ -49,11 +49,6 @@ Container singInsingUpButton(
       onPressed: () {
         onTap();
       },
-      child: Text(
-        isLogin ? 'Log In' : 'Sign Up',
-        style: const TextStyle(
-            color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 16),
-      ),
       style: ButtonStyle(
           backgroundColor: MaterialStateProperty.resolveWith((states) {
             if (states.contains(MaterialState.pressed)) {
@@ -63,11 +58,16 @@ Container singInsingUpButton(
           }),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),
+      child: Text(
+        isLogin ? 'Log In' : 'Sign Up',
+        style: const TextStyle(
+            color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 16),
+      ),
     ),
   );
 }
 
-Container google_account(BuildContext context, bool isLogin, Function onTap) {
+Container googleAccount(BuildContext context, bool isLogin, Function onTap) {
   return Container(
     width: MediaQuery.of(context).size.width,
     height: 50,
@@ -77,24 +77,6 @@ Container google_account(BuildContext context, bool isLogin, Function onTap) {
       onPressed: () {
         onTap();
       },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.network(
-            'https://cdn-icons-png.flaticon.com/512/2991/2991148.png',
-            width: 20,
-            height: 20,
-          ),
-          SizedBox(width: 10),
-          Text(
-            isLogin ? 'Sign-in with Google' : 'Sign-in with Google',
-            style: const TextStyle(
-                color: Colors.black87,
-                fontWeight: FontWeight.bold,
-                fontSize: 16),
-          ),
-        ],
-      ),
       style: ButtonStyle(
           backgroundColor: MaterialStateProperty.resolveWith((states) {
             if (states.contains(MaterialState.pressed)) {
@@ -104,6 +86,24 @@ Container google_account(BuildContext context, bool isLogin, Function onTap) {
           }),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.network(
+            'https://cdn-icons-png.flaticon.com/512/2991/2991148.png',
+            width: 20,
+            height: 20,
+          ),
+          const SizedBox(width: 10),
+          Text(
+            isLogin ? 'Sign-in with Google' : 'Sign-in with Google',
+            style: const TextStyle(
+                color: Colors.black87,
+                fontWeight: FontWeight.bold,
+                fontSize: 16),
+          ),
+        ],
+      ),
     ),
   );
 }
