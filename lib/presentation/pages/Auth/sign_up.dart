@@ -20,61 +20,77 @@ class SingUpScreenState extends State<SingUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        
         title: const Text("Registro"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(50),
-        child: Column(
-          children: [
-            Expanded(
-              child: Image.asset(
-                "assets/logo.png",
-                fit: BoxFit.contain,
+      body: SafeArea(
+        child: Container(
+          width: size.width,
+          height: size.height,
+           decoration: BoxDecoration(
+          border: Border.all(width: 2),
+            gradient: LinearGradient(
+                colors: [
+              Colors.blueGrey.shade500,Colors.green.shade300
+             
+            ],)),
+          child: Column(
+          
+            children: [
+              Expanded(
+                child: Image.asset(
+                  "assets/logo.png",
+                  fit: BoxFit.contain,
+                ),
               ),
-            ),
-            StreamBuilder(
-                stream: null,
-                builder: (context, snapshot) {
-                  if (loadingPage) return const LinearProgressIndicator();
-                  return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        // reusableTxtfield(
-                        //     "Usuario", Icons.person_outline, false, _userNameTextcontroller),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        reusableTxtfield("Email", Icons.person_outline, false,
-                            _emailTextcontroller),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        reusableTxtfield("Contraseña", Icons.lock_outline, true,
-                            _passwordTextcontroller),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        singInsingUpButton(context, false, () {
-                          FirebaseAuth.instance
-                              .createUserWithEmailAndPassword(
-                                  email: _emailTextcontroller.text,
-                                  password: _passwordTextcontroller.text)
-                              .then((value) {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const MapScreen()));
-                          }).onError((error, stackTrace) {});
-                        }),
-                        signUpOption()
-                      ]);
-                }),
-          ],
+              StreamBuilder(
+                  stream: null,
+                  builder: (context, snapshot) {
+                    if (loadingPage) return const LinearProgressIndicator();
+                    return Padding(
+                      padding: const EdgeInsets.all(25),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            // reusableTxtfield(
+                            //     "Usuario", Icons.person_outline, false, _userNameTextcontroller),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            reusableTxtfield("Email", Icons.person_outline, false,
+                                _emailTextcontroller),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            reusableTxtfield("Contraseña", Icons.lock_outline, true,
+                                _passwordTextcontroller),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            singInsingUpButton(context, false, () {
+                              FirebaseAuth.instance
+                                  .createUserWithEmailAndPassword(
+                                      email: _emailTextcontroller.text,
+                                      password: _passwordTextcontroller.text)
+                                  .then((value) {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const MapScreen()));
+                              }).onError((error, stackTrace) {});
+                            }),
+                            signUpOption()
+                          ]),
+                    );
+                  }),
+            ],
+          ),
         ),
       ),
     );
