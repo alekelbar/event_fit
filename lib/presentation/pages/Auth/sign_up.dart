@@ -33,46 +33,50 @@ class SingUpScreenState extends State<SingUpScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(50),
-        child: StreamBuilder(
-            stream: null,
-            builder: (context, snapshot) {
-              if (loadingPage) return const LinearProgressIndicator();
-              return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    // reusableTxtfield(
-                    //     "Usuario", Icons.person_outline, false, _userNameTextcontroller),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    reusableTxtfield("Email", Icons.person_outline, false,
-                        _emailTextcontroller),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    reusableTxtfield("Contraseña", Icons.lock_outline, true,
-                        _passwordTextcontroller),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    singInsingUpButton(context, false, () {
-                      FirebaseAuth.instance
-                          .createUserWithEmailAndPassword(
-                              email: _emailTextcontroller.text,
-                              password: _passwordTextcontroller.text)
-                          .then((value) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const MapScreen()));
-                      }).onError((error, stackTrace) {});
-                    }),
-                    signUpOption()
-                  ]);
-            }),
+        child: Column(
+          children: [
+            StreamBuilder(
+                stream: null,
+                builder: (context, snapshot) {
+                  if (loadingPage) return const LinearProgressIndicator();
+                  return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        // reusableTxtfield(
+                        //     "Usuario", Icons.person_outline, false, _userNameTextcontroller),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        reusableTxtfield("Email", Icons.person_outline, false,
+                            _emailTextcontroller),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        reusableTxtfield("Contraseña", Icons.lock_outline, true,
+                            _passwordTextcontroller),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        singInsingUpButton(context, false, () {
+                          FirebaseAuth.instance
+                              .createUserWithEmailAndPassword(
+                                  email: _emailTextcontroller.text,
+                                  password: _passwordTextcontroller.text)
+                              .then((value) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const MapScreen()));
+                          }).onError((error, stackTrace) {});
+                        }),
+                        signUpOption()
+                      ]);
+                }),
+          ],
+        ),
       ),
     );
   }

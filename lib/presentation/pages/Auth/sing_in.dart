@@ -90,7 +90,7 @@ class _SingInScreenState extends State<SingInScreen> {
       TextButton(
         onPressed: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const SingUpScreen()));
+              MaterialPageRoute(builder: (context) => const OtpPage()));
         },
         child: const Text(
           " ¿Todavía no tienes una cuenta? ",
