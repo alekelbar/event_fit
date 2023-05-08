@@ -7,7 +7,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // Agrega esta línea
-  await permissionVerification(); 
+  await permissionVerification();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
