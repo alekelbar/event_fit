@@ -1,8 +1,6 @@
 import 'package:event_fit/presentation/common/widgets/reusable_widget.dart';
 import 'package:event_fit/presentation/pages/Auth/opt.dart';
-import 'package:event_fit/presentation/pages/Auth/sign_up.dart';
 import 'package:event_fit/presentation/pages/googleMaps/map.dart';
-import 'package:event_fit/presentation/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 

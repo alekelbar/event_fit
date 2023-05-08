@@ -2,7 +2,7 @@ import 'package:event_fit/config/theme/config_theme.dart';
 import 'package:event_fit/presentation/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'config/Firebase/firebase_options.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 void main() async {
