@@ -1,4 +1,6 @@
+import 'package:event_fit/presentation/pages/Auth/sing_in.dart';
 import 'package:event_fit/presentation/pages/googleMaps/controllers/map_controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -17,6 +19,11 @@ class MapScreenState extends State<MapScreen> {
   String _startsAt = '';
   String _duration = '';
 
+  void backToLogin() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (_) => const SingInScreen()));
+  }
+
   bool isHybrid = false;
 
   @override
@@ -24,10 +31,11 @@ class MapScreenState extends State<MapScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Eventos'),
-        leading: TextButton(
-          child: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
+        leading: IconButton(
+          icon: const Icon(Icons.logout),
+          onPressed: () async {
+            await FirebaseAuth.instance.signOut();
+            backToLogin();
           },
         ),
       ),

@@ -21,19 +21,19 @@ class SingUpScreenState extends State<SingUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        leading: TextButton(
-          child: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+        title: const Text("Registro"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(50),
         child: Column(
           children: [
+            Expanded(
+              child: Image.asset(
+                "assets/logo.png",
+                fit: BoxFit.contain,
+              ),
+            ),
             StreamBuilder(
                 stream: null,
                 builder: (context, snapshot) {

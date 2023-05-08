@@ -16,6 +16,11 @@ class _SingInScreenState extends State<SingInScreen> {
   final TextEditingController _emailTextcontroller = TextEditingController();
   bool loadingPage = false;
 
+  void goToMapScreen() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (_) => const MapScreen()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +29,12 @@ class _SingInScreenState extends State<SingInScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Expanded(
+              child: Image.asset(
+                "assets/logo.png",
+                fit: BoxFit.contain,
+              ),
+            ),
             StreamBuilder(
                 stream: null,
                 builder: (context, snapshot) {
@@ -36,43 +47,70 @@ class _SingInScreenState extends State<SingInScreen> {
                       reusableTxtfield("Contraseña", Icons.lock_outline, true,
                           _passwordTextcontroller),
                       const SizedBox(height: 20),
-                      singInsingUpButton(context, true, () {
-                        setState(() {
-                          loadingPage = true;
-                        });
-                        FirebaseAuth.instance
-                            .signInWithEmailAndPassword(
-                                email: _emailTextcontroller.text,
-                                password: _passwordTextcontroller.text)
-                            .then((value) {
-                          setState(() {
-                            loadingPage = false;
-                          });
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const MapScreen()));
-                        }).onError((error, stackTrace) {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: const Text('Error'),
-                                content: const Text(
-                                    " Email o Contraseña incorrecta"),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: const Text('OK'),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                ],
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.7,
+                        height: MediaQuery.of(context).size.width * 0.12,
+                        margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(90)),
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            setState(() {
+                              loadingPage = true;
+                            });
+                            try {
+                              await FirebaseAuth.instance
+                                  .signInWithEmailAndPassword(
+                                      email: _emailTextcontroller.text,
+                                      password: _passwordTextcontroller.text);
+                              goToMapScreen();
+                            } catch (error) {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: const Text('Error'),
+                                    content: const Text(
+                                        " Email o Contraseña incorrecta"),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: const Text('OK'),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
                               );
-                            },
-                          );
-                        });
-                      }),
+                            } finally {
+                              setState(() {
+                                loadingPage = false;
+                              });
+                            }
+                          },
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.resolveWith((states) {
+                                if (states.contains(MaterialState.pressed)) {
+                                  return Colors.black26;
+                                }
+                                return Colors.white;
+                              }),
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(30)))),
+                          child: const Text(
+                            'Log In',
+                            style: TextStyle(
+                                color: Colors.black87,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16),
+                          ),
+                        ),
+                      ),
                       signUpOption(),
                     ],
                   );
