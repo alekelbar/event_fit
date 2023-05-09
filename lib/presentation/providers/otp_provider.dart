@@ -31,6 +31,12 @@ class OptProviderController extends ChangeNotifier {
     notifyListeners();
   }
 
+  void reSend() {
+    if (phoneNumber.isNotEmpty) {
+      sendMessage();
+    }
+  }
+
   void sendMessage() async {
     actualOtp = generateOTP();
     if (phoneNumber.isNotEmpty) {

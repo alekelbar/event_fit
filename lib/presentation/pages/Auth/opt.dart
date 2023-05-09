@@ -27,17 +27,13 @@ class OtpWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final optController = context.watch<OptProviderController>();
     return Scaffold(
-      
       body: Container(
         decoration: BoxDecoration(
-          border: Border.all(width: 2),
             gradient: LinearGradient(
-                colors: [
-              Colors.blueGrey.shade500,Colors.green.shade300
-             
-            ],)),
+          colors: [Colors.blueGrey.shade500, Colors.green.shade300],
+        )),
         child: Padding(
-          padding: const EdgeInsets.all(15),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +42,7 @@ class OtpWidget extends StatelessWidget {
                 "Código de verificación",
                 style: TextStyle(
                   fontSize: 27,
-                  color: Colors.white,
+                  color: Colors.purple,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -54,17 +50,14 @@ class OtpWidget extends StatelessWidget {
                 "Enviaremos el código de verificación a ${optController.phoneNumber}",
                 style: const TextStyle(
                   fontSize: 15,
-                  color: Colors.white,
+                  color: Colors.white70,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               OptForm(),
-              const SizedBox(
-                height: 15,
-              ),
               const OptLocalButtons(),
-              const OptReSendButton(),
               const PhoneNumberForm(),
+              const reEnterNumber(),
             ],
           ),
         ),
@@ -85,21 +78,29 @@ class PhoneNumberForm extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextFormField(
-              keyboardType: TextInputType.phone,
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(8),
-              ],
-              decoration: const InputDecoration(
-                
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: TextFormField(
+                keyboardType: TextInputType.phone,
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(8),
+                ],
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white.withOpacity(0.2),
                   labelText: "Número de telefóno",
-                  prefixIcon: Icon(Icons.phone)),
-              textAlign: TextAlign.start,
-              enabled: otpProvider.isActivePhoneField,
-              onFieldSubmitted: (value) {
-                otpProvider.phoneNumber = value;
-                otpProvider.sendMessage();
-              },
+                  prefixIcon: const Icon(Icons.phone),
+                ),
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.start,
+                enabled: otpProvider.isActivePhoneField,
+                onFieldSubmitted: (value) {
+                  otpProvider.phoneNumber = value;
+                  otpProvider.sendMessage();
+                },
+              ),
             )
           ],
         ),
@@ -108,16 +109,16 @@ class PhoneNumberForm extends StatelessWidget {
   }
 }
 
-class OptReSendButton extends StatefulWidget {
-  const OptReSendButton({
+class reEnterNumber extends StatefulWidget {
+  const reEnterNumber({
     super.key,
   });
 
   @override
-  State<OptReSendButton> createState() => _OptReSendButtonState();
+  State<reEnterNumber> createState() => _reEnterNumberState();
 }
 
-class _OptReSendButtonState extends State<OptReSendButton> {
+class _reEnterNumberState extends State<reEnterNumber> {
   @override
   Widget build(BuildContext context) {
     final otpProvider = context.watch<OptProviderController>();
@@ -156,7 +157,6 @@ class OptLocalButtons extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.center,
-
       children: [
         TextButton(
             style: const ButtonStyle(
@@ -178,7 +178,9 @@ class OptLocalButtons extends StatelessWidget {
               ),
             )),
         ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              otpProvider.reSend();
+            },
             child: const Text(
               "Re-enviar",
               style: TextStyle(
@@ -212,7 +214,8 @@ class OptForm extends StatelessWidget {
               height: 64,
               width: 64,
               child: TextFormField(
-                style: Theme.of(context).textTheme.headlineMedium,
+                decoration: InputDecoration(
+                    filled: true, fillColor: Colors.white.withOpacity(0.2)),
                 onChanged: (value) {
                   if (value.length == 1) {
                     otpProvider.addDigit(value);
@@ -231,7 +234,8 @@ class OptForm extends StatelessWidget {
               height: 64,
               width: 64,
               child: TextFormField(
-                style: Theme.of(context).textTheme.headlineMedium,
+                decoration: InputDecoration(
+                    filled: true, fillColor: Colors.white.withOpacity(0.2)),
                 onChanged: (value) {
                   if (value.length == 1) {
                     otpProvider.addDigit(value);
@@ -250,7 +254,8 @@ class OptForm extends StatelessWidget {
               height: 64,
               width: 64,
               child: TextFormField(
-                style: Theme.of(context).textTheme.headlineMedium,
+                decoration: InputDecoration(
+                    filled: true, fillColor: Colors.white.withOpacity(0.2)),
                 onChanged: (value) {
                   if (value.length == 1) {
                     otpProvider.addDigit(value);
@@ -269,7 +274,8 @@ class OptForm extends StatelessWidget {
               height: 64,
               width: 64,
               child: TextFormField(
-                style: Theme.of(context).textTheme.headlineMedium,
+                decoration: InputDecoration(
+                    filled: true, fillColor: Colors.white.withOpacity(0.2)),
                 onChanged: (value) {
                   if (value.length == 1) {
                     otpProvider.addDigit(value);
