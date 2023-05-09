@@ -13,15 +13,16 @@ class Homescreen extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             // Si estamos esperando una respuesta del servidor de autenticación
             return const Center(
-              child: CircularProgressIndicator(),
+              child: LinearProgressIndicator(),
             );
-          } else if (snapshot.hasData) {
+          }
+
+          if (!snapshot.hasData) {
             // Si el usuario está autenticado, redirigir a la pantalla de mapa
-            return const MapScreen();
-          } else {
-            // Si el usuario no está autenticado, redirigir a la pantalla de inicio de sesión
             return const SafeArea(child: SingInScreen());
           }
+
+          return const SafeArea(child: MapScreen());
         });
   }
 }

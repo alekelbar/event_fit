@@ -1,9 +1,7 @@
 import 'package:event_fit/presentation/common/widgets/reusable_widget.dart';
-import 'package:event_fit/presentation/pages/Auth/opt.dart';
-import 'package:event_fit/presentation/pages/googleMaps/map.dart';
-import 'package:flutter/material.dart';
+import 'package:event_fit/presentation/pages/Auth/sign_up.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:flutter/material.dart';
 
 class SingInScreen extends StatefulWidget {
   const SingInScreen({super.key});
@@ -13,48 +11,112 @@ class SingInScreen extends StatefulWidget {
 }
 
 class _SingInScreenState extends State<SingInScreen> {
-  final TextEditingController _passwordTextcontroller = TextEditingController();
-  final TextEditingController _emailTextcontroller = TextEditingController();
+  final TextEditingController _passwordTextcontroller =
+      TextEditingController(text: "alex1234");
+  final TextEditingController _emailTextcontroller =
+      TextEditingController(text: "alekelbar.personal@gmail.com");
   bool loadingPage = false;
 
-  void goToMapScreen() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (_) => const MapScreen()));
+  final _formKey = GlobalKey<FormState>();
+
+  String? validator(value) {
+    if (value == null || value.isEmpty) {
+      return 'El campo es requerido';
+    }
+    return null;
+  }
+
+  void showError(String message) async {
+    await showDialog(
+        context: context,
+        builder: (_) {
+          return Dialog(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      message,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                      style: const ButtonStyle(
+                          backgroundColor:
+                              MaterialStatePropertyAll(Colors.green)),
+                      child: const Text(
+                        "OK",
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.w200,
+                          color: Colors.white,
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        alignment: Alignment.center,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
-          border: Border.all(width: 2),
             gradient: LinearGradient(
-                colors: [
-              Colors.blueGrey.shade500,Colors.green.shade300
-             
-            ],)),
-        child: Padding(
-          padding: const EdgeInsets.all(30),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Image.asset(
-                  "assets/logo.png",
-                  fit: BoxFit.contain,
-                ),
-              ),
-              StreamBuilder(
-                  stream: null,
-                  builder: (context, snapshot) {
-                    if (loadingPage) return const LinearProgressIndicator();
-                    return Column(
+          colors: [Colors.blueGrey.shade500, Colors.green.shade300],
+        )),
+        child: loadingPage
+            ? const LinearProgressIndicator()
+            : Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                child: Form(
+                  key: _formKey,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        reusableTxtfield("Usuario", Icons.person_2_outlined,
-                            false, _emailTextcontroller),
+                        Image.asset(
+                          "assets/logo.png",
+                          fit: BoxFit.contain,
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height / 3,
+                        ),
+                        reusableTxtfield(
+                          "Usuario",
+                          Icons.person_2_outlined,
+                          false,
+                          _emailTextcontroller,
+                          validator,
+                        ),
                         const SizedBox(height: 20),
-                        reusableTxtfield("Contraseña", Icons.lock_outline, true,
-                            _passwordTextcontroller),
+                        reusableTxtfield(
+                          "Contraseña",
+                          Icons.lock_outline,
+                          true,
+                          _passwordTextcontroller,
+                          validator,
+                        ),
                         const SizedBox(height: 20),
                         Container(
                           width: MediaQuery.of(context).size.width * 0.7,
@@ -64,6 +126,10 @@ class _SingInScreenState extends State<SingInScreen> {
                               borderRadius: BorderRadius.circular(90)),
                           child: ElevatedButton(
                             onPressed: () async {
+                              if (!_formKey.currentState!.validate()) {
+                                return;
+                              }
+                              _formKey.currentState!.save();
                               setState(() {
                                 loadingPage = true;
                               });
@@ -72,26 +138,9 @@ class _SingInScreenState extends State<SingInScreen> {
                                     .signInWithEmailAndPassword(
                                         email: _emailTextcontroller.text,
                                         password: _passwordTextcontroller.text);
-                                goToMapScreen();
-                              } catch (error) {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: const Text('Error'),
-                                      content: const Text(
-                                          " Email o Contraseña incorrecta"),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          child: const Text('OK'),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
+                                setState(() {});
+                              } on FirebaseAuthException catch (e) {
+                                showError("Credenciales incorrectas");
                               } finally {
                                 setState(() {
                                   loadingPage = false;
@@ -122,11 +171,10 @@ class _SingInScreenState extends State<SingInScreen> {
                         ),
                         signUpOption(),
                       ],
-                    );
-                  }),
-            ],
-          ),
-        ),
+                    ),
+                  ),
+                ),
+              ),
       ),
     );
   }
@@ -136,7 +184,7 @@ class _SingInScreenState extends State<SingInScreen> {
       TextButton(
         onPressed: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const OtpPage()));
+              MaterialPageRoute(builder: (context) => const SingUpScreen()));
         },
         child: const Text(
           " ¿Todavía no tienes una cuenta? ",
