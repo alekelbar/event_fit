@@ -139,7 +139,7 @@ class _SingInScreenState extends State<SingInScreen> {
                                         email: _emailTextcontroller.text,
                                         password: _passwordTextcontroller.text);
                                 setState(() {});
-                              } on FirebaseAuthException catch (e) {
+                              } on FirebaseAuthException catch (_) {
                                 showError("Credenciales incorrectas");
                               } finally {
                                 setState(() {
