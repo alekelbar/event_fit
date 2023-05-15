@@ -1,3 +1,4 @@
+import 'package:event_fit/data/publish_seed.dart';
 import 'package:flutter/material.dart';
 
 class PublishWall extends StatelessWidget {
@@ -5,6 +6,8 @@ class PublishWall extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -13,7 +16,7 @@ class PublishWall extends StatelessWidget {
             onPressed: () {},
             icon: const Icon(Icons.add),
             style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(Colors.white70),
+                backgroundColor: MaterialStatePropertyAll(Colors.white),
                 iconSize: MaterialStatePropertyAll(35)),
           )
         ],
@@ -23,8 +26,57 @@ class PublishWall extends StatelessWidget {
             gradient: LinearGradient(
           colors: [Colors.blueGrey.shade500, Colors.green.shade300],
         )),
-        child: const Center(
-          child: Text("Texto centrado"),
+        child: ListView.builder(
+          itemCount: publishData.length,
+          itemBuilder: (context, index) {
+            final publish = publishData[index];
+            return Padding(
+              padding: const EdgeInsets.all(10),
+              child: Card(
+                elevation: 10,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            publish.name,
+                            textAlign: TextAlign.start,
+                            style: const TextStyle(
+                              fontSize: 25,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Text(
+                      publish.siteDescription,
+                      style: const TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                    Image.network(
+                      publish.imageUrl,
+                      width: size.width,
+                      fit: BoxFit.cover,
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                            onPressed: () {}, icon: const Icon(Icons.people)),
+                        IconButton(
+                            onPressed: () {}, icon: const Icon(Icons.place)),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            );
+          },
         ),
       ),
     );

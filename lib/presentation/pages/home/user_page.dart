@@ -33,7 +33,6 @@ class _UserPageState extends State<UserPage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (int index) {
-          print(index);
           setState(() {
             _currentIndex = index;
           });
