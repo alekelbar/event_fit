@@ -57,7 +57,7 @@ class OtpWidget extends StatelessWidget {
               OptForm(),
               const OptLocalButtons(),
               const PhoneNumberForm(),
-              const reEnterNumber(),
+              const ReEnterNumber(),
             ],
           ),
         ),
@@ -109,16 +109,16 @@ class PhoneNumberForm extends StatelessWidget {
   }
 }
 
-class reEnterNumber extends StatefulWidget {
-  const reEnterNumber({
+class ReEnterNumber extends StatefulWidget {
+  const ReEnterNumber({
     super.key,
   });
 
   @override
-  State<reEnterNumber> createState() => _reEnterNumberState();
+  State<ReEnterNumber> createState() => _ReEnterNumberState();
 }
 
-class _reEnterNumberState extends State<reEnterNumber> {
+class _ReEnterNumberState extends State<ReEnterNumber> {
   @override
   Widget build(BuildContext context) {
     final otpProvider = context.watch<OptProviderController>();

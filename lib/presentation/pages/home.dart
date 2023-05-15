@@ -1,5 +1,5 @@
 import 'package:event_fit/presentation/pages/Auth/sing_in.dart';
-import 'package:event_fit/presentation/pages/googleMaps/map.dart';
+import 'package:event_fit/presentation/pages/home/user_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +22,7 @@ class Homescreen extends StatelessWidget {
             return const SafeArea(child: SingInScreen());
           }
 
-          return const SafeArea(child: MapScreen());
+          return const SafeArea(child: UserPage());
         });
   }
 }

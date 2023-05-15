@@ -162,12 +162,11 @@ class SingUpScreenState extends State<SingUpScreen> {
                                     _formKey.currentState!.save();
 
                                     try {
-                                      final user = await FirebaseAuth.instance
+                                      await FirebaseAuth.instance
                                           .createUserWithEmailAndPassword(
                                         email: _emailTextcontroller.text,
                                         password: _passwordTextcontroller.text,
                                       );
-                                      //TODO: go to home
                                     } on FirebaseAuthException catch (e) {
                                       String errorMessage =
                                           'Un error desconocido ocurrio.';

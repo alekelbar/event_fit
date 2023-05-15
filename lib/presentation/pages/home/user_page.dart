@@ -1,3 +1,5 @@
+import 'package:event_fit/presentation/pages/googleMaps/map.dart';
+import 'package:event_fit/presentation/pages/home/publish_wall.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +11,9 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
+  int _currentIndex = 0;
+  List<Widget> pages = const [PublishWall(), MapScreen()];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,8 +31,19 @@ class _UserPageState extends State<UserPage> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const [BottomNavigationBarItem(icon: Icon(Icons.abc))],
+        currentIndex: _currentIndex,
+        onTap: (int index) {
+          print(index);
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Inicio"),
+          BottomNavigationBarItem(icon: Icon(Icons.gps_fixed), label: "Eventos")
+        ],
       ),
+      body: pages[_currentIndex],
     );
   }
 
