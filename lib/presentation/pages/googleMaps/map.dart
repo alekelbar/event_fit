@@ -25,16 +25,6 @@ class MapScreenState extends State<MapScreen> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           ElevatedButton(
-            onPressed: () {},
-            style: const ButtonStyle(
-              minimumSize: MaterialStatePropertyAll(Size(70, 60)),
-            ),
-            child: const Icon(Icons.gps_fixed),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          ElevatedButton(
             style: const ButtonStyle(
               minimumSize: MaterialStatePropertyAll(Size(70, 60)),
             ),
@@ -58,6 +48,9 @@ class MapScreenState extends State<MapScreen> {
         zoomControlsEnabled: false,
         mapType: isHybrid ? MapType.hybrid : MapType.normal,
         compassEnabled: true,
+        myLocationButtonEnabled: true,
+        myLocationEnabled: true,
+        zoomGesturesEnabled: true,
       ),
     );
   }
