@@ -1,5 +1,5 @@
 import 'package:event_fit/presentation/common/widgets/reusable_widget.dart';
-import 'package:event_fit/presentation/pages/Auth/sign_up.dart';
+import 'package:event_fit/presentation/routes/routes_names.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -183,8 +183,7 @@ class _SingInScreenState extends State<SingInScreen> {
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
       TextButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const SingUpScreen()));
+          Navigator.pushReplacementNamed(context, RoutesNames.registerPage);
         },
         child: const Text(
           " ¿Todavía no tienes una cuenta? ",
