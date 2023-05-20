@@ -1,6 +1,7 @@
 import 'package:event_fit/config/theme/config_theme.dart';
 import 'package:event_fit/domain/utils/permission/get_message_permision_state.dart';
 import 'package:event_fit/presentation/routes/routes.dart';
+import 'package:event_fit/presentation/routes/routes_names.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'config/Firebase/firebase_options.dart';
@@ -12,7 +13,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
   runApp(const MyApp());
 }
 
@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme(selectedColor: 3).theme(),
       routes: routes,
+      initialRoute: RoutesNames.homePage,
     );
   }
 }
