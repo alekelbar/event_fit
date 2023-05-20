@@ -18,7 +18,6 @@ void main() async {
 
 // This void asks the user to accept the permissions to send sms.
 
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
