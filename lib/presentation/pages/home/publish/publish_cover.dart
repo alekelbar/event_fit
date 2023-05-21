@@ -11,9 +11,9 @@ class PublishCover extends StatelessWidget {
             gradient: LinearGradient(
           colors: [
             Colors.transparent,
-            Colors.lightBlue,
+            Colors.black87,
           ],
-          stops: [0.8, 1.0],
+          stops: [0.7, 1.0],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
         )),

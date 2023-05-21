@@ -5,25 +5,29 @@ class PublishButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        _CustomIconButton(
-          icon: Icons.favorite,
-          colorData: Colors.red,
-        ),
-        SizedBox(
-          height: 25,
-        ),
-        _CustomIconButton(
-          icon: Icons.gps_fixed,
-        ),
-        SizedBox(
-          height: 25,
-        ),
-        _CustomIconButton(
-          icon: Icons.people,
-        ),
-      ],
+    return const Positioned(
+      bottom: 20,
+      right: 10,
+      child: Column(
+        children: [
+          _CustomIconButton(
+            icon: Icons.favorite,
+            colorData: Colors.red,
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          _CustomIconButton(
+            icon: Icons.gps_fixed,
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          _CustomIconButton(
+            icon: Icons.people,
+          ),
+        ],
+      ),
     );
   }
 }

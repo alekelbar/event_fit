@@ -17,19 +17,19 @@ class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Bienvenido'),
-        leading: IconButton(
-          icon: const Icon(Icons.logout),
-          onPressed: () async {
-            bool exit = await onExit();
-            if (exit) {
-              await FirebaseAuth.instance.signOut();
-              setState(() {});
-            }
-          },
-        ),
-      ),
+      // TODO: redefine ways to exit
+      // appBar: AppBar(
+      //   leading: IconButton(
+      //     icon: const Icon(Icons.logout),
+      //     onPressed: () async {
+      //       bool exit = await onExit();
+      //       if (exit) {
+      //         await FirebaseAuth.instance.signOut();
+      //         setState(() {});
+      //       }
+      //     },
+      //   ),
+      // ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (int index) {
