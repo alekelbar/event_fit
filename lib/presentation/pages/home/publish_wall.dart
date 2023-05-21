@@ -1,7 +1,5 @@
 import 'package:event_fit/data/publish_seed.dart';
-import 'package:event_fit/domain/models/publish.dart';
 import 'package:event_fit/presentation/pages/home/publish/publish_buttons.dart';
-import 'package:event_fit/presentation/pages/home/publish/publish_cover.dart';
 import 'package:event_fit/presentation/pages/home/publish/publish_image.dart';
 import 'package:event_fit/presentation/pages/home/publish/publish_text.dart';
 import 'package:flutter/material.dart';

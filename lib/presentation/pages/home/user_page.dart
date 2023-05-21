@@ -1,6 +1,5 @@
 import 'package:event_fit/presentation/pages/googleMaps/map.dart';
 import 'package:event_fit/presentation/pages/home/publish_wall.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class UserPage extends StatefulWidget {
@@ -17,7 +16,6 @@ class _UserPageState extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // TODO: redefine ways to exit
       // appBar: AppBar(
       //   leading: IconButton(
       //     icon: const Icon(Icons.logout),

@@ -1,4 +1,3 @@
-import 'package:event_fit/domain/models/publish.dart';
 import 'package:event_fit/presentation/pages/home/publish/publish_cover.dart';
 import 'package:flutter/material.dart';
 
