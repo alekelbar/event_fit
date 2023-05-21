@@ -12,7 +12,7 @@ class UserPage extends StatefulWidget {
 
 class _UserPageState extends State<UserPage> {
   int _currentIndex = 0;
-  List<Widget> pages = const [PublishWall(), MapScreen()];
+  List<Widget> pages = [PublishWall(), const MapScreen()];
 
   @override
   Widget build(BuildContext context) {

@@ -4,50 +4,50 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 final List<Publish> publishData = [
   Publish(
       id: "001",
-      name: "publish one",
-      siteDescription: "en mi casita",
+      name: "¡De paseo!",
+      siteDescription: "En una playa de méxico",
       imageUrl:
-          "https://d500.epimg.net/cincodias/imagenes/2019/05/02/lifestyle/1556809482_591063_1556811610_noticia_normal.jpg",
+          "https://th.bing.com/th/id/OIP.kledA06j2arvt0d3ndXciAHaNK?pid=ImgDet&rs=1",
       type: DynamicEvent(
           pointOne: const LatLng(100, 100), pointTwo: const LatLng(100, 100))),
   Publish(
       id: "002",
-      name: "publish two",
-      siteDescription: "Al GYM",
+      name: "¡Increible!",
+      siteDescription: "Visitando un lugar de ensueño",
       imageUrl:
-          "https://elcomercio.pe/resizer/8QH0dkyeXB0DOIYQDIOvAR3_E8I=/980x0/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/5MEZYIWBRFDSRIJ6ZBZCNP4SU4.jpg",
+          "https://thenorthernboy.com/wp-content/uploads/2020/03/top-Lake-District-accomodation-683x1024.png",
       type: DynamicEvent(
           pointOne: const LatLng(100, 100), pointTwo: const LatLng(100, 100))),
   Publish(
       id: "002",
-      name: "publish three",
-      siteDescription: "a jugar bola",
+      name: "De pelicula",
+      siteDescription: "el agua parece un cristal",
       imageUrl:
-          "https://i.pinimg.com/736x/7a/2f/f6/7a2ff6f9b328a848b8a9d5e571210432.jpg",
+          "https://thumbs.dreamstime.com/b/jacques-cartier-provincial-park-7674763.jpg",
       type: DynamicEvent(
           pointOne: const LatLng(100, 100), pointTwo: const LatLng(100, 100))),
   Publish(
       id: "002",
-      name: "publish three",
-      siteDescription: "a jugar bola",
-      imageUrl:
-          "https://st4.depositphotos.com/9925326/40560/i/450/depositphotos_405608314-stock-photo-soccer-player-kicking-ball-on.jpg",
+      name: "¿Te vienes?",
+      siteDescription: "Un tranquilo día de pesca",
+      imageUrl: "https://i.redd.it/4lbqx4c7ggmz.jpg",
       type: DynamicEvent(
           pointOne: const LatLng(100, 100), pointTwo: const LatLng(100, 100))),
   Publish(
       id: "002",
-      name: "publish three",
-      siteDescription: "a jugar bola",
+      name: "El atardecer",
+      siteDescription: "No hay mejor momento para relajarse",
       imageUrl:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTndd2SWxgD0GgxRX26_19LlLg1HoOnyxL0AQ&usqp=CAU",
+          "https://i.pinimg.com/originals/cc/ce/60/ccce60b01fd0db4ff32e563c77c15dbd.jpg",
       type: DynamicEvent(
           pointOne: const LatLng(100, 100), pointTwo: const LatLng(100, 100))),
   Publish(
       id: "002",
-      name: "publish three",
-      siteDescription: "a jugar bola",
+      name: "¿Viste?",
+      siteDescription:
+          "Es como si el sol se escondiera literalmente tras la montaña",
       imageUrl:
-          "https://media.istockphoto.com/id/1295916972/es/foto/el-f%C3%BAtbol-es-mi-vida.jpg?s=612x612&w=0&k=20&c=gLYUOQvx_5_z2f32LXunhdCHVS1V0wl9w9TD7tkttMY=",
+          "https://i.pinimg.com/originals/ff/71/21/ff712154380202b84ef55f9d9f0b2c59.jpg",
       type: DynamicEvent(
           pointOne: const LatLng(100, 100), pointTwo: const LatLng(100, 100)))
 ];

@@ -1,83 +1,75 @@
 import 'package:event_fit/data/publish_seed.dart';
+import 'package:event_fit/presentation/pages/home/publish/publish_buttons.dart';
+import 'package:event_fit/presentation/pages/home/publish/publish_cover.dart';
 import 'package:flutter/material.dart';
 
 class PublishWall extends StatelessWidget {
-  const PublishWall({super.key});
+  PublishWall({super.key});
+  final publishes = publishData;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final textHeader = Theme.of(context).textTheme.headlineSmall;
+    final textBody = Theme.of(context).textTheme.bodyLarge;
 
     return Scaffold(
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.add),
-            style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(Colors.white),
-                iconSize: MaterialStatePropertyAll(35)),
-          )
-        ],
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-          colors: [Colors.blueGrey.shade500, Colors.green.shade300],
-        )),
-        child: ListView.builder(
-          itemCount: publishData.length,
-          itemBuilder: (context, index) {
-            final publish = publishData[index];
-            return Padding(
-              padding: const EdgeInsets.all(10),
-              child: Card(
-                elevation: 10,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            publish.name,
-                            textAlign: TextAlign.start,
-                            style: const TextStyle(
-                              fontSize: 25,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Text(
-                      publish.siteDescription,
-                      style: const TextStyle(
-                        fontSize: 20,
-                      ),
-                    ),
-                    Image.network(
+      body: PageView.builder(
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.vertical,
+        itemCount: publishes.length,
+        itemBuilder: (context, index) {
+          final publish = publishes[index];
+          return Stack(
+            children: [
+              SizedBox.expand(
+                  child: Stack(
+                children: [
+                  Center(
+                    child: Image.network(
+                      fit: BoxFit.contain,
                       publish.imageUrl,
                       width: size.width,
-                      fit: BoxFit.cover,
+                      height: size.height,
                     ),
-                    Row(
-                      children: [
-                        IconButton(
-                            onPressed: () {}, icon: const Icon(Icons.people)),
-                        IconButton(
-                            onPressed: () {}, icon: const Icon(Icons.place)),
-                      ],
-                    )
+                  ),
+                  const PublishCover(),
+                ],
+              )),
+              const Positioned(
+                bottom: 20,
+                right: 10,
+                child: PublishButtons(),
+              ),
+              Positioned(
+                bottom: 20,
+                left: 10,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: size.width * 0.7,
+                      child: Text(
+                        textAlign: TextAlign.start,
+                        publish.name,
+                        maxLines: 2,
+                        style: textHeader,
+                      ),
+                    ),
+                    SizedBox(
+                      width: size.width * 0.7,
+                      child: Text(
+                        textAlign: TextAlign.start,
+                        publish.siteDescription,
+                        maxLines: 2,
+                        style: textBody,
+                      ),
+                    ),
                   ],
                 ),
-              ),
-            );
-          },
-        ),
+              )
+            ],
+          );
+        },
       ),
     );
   }
