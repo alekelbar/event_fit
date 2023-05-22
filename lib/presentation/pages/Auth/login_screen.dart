@@ -8,6 +8,7 @@ import 'package:event_fit/presentation/widgets/shared/custom_loading_screen.dart
 import 'package:event_fit/presentation/widgets/shared/reusable_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:auth_buttons/auth_buttons.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -83,7 +84,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           type: ButtonTypes.login,
                           onPress: () => login(loginProvider),
                         ),
-                        TextButton(
+                        GoogleAuthButton(
+                          text: 'Iniciar sesión con Google',
+                          style: const AuthButtonStyle(borderRadius: 90),
                           onPressed: () async {
                             final result =
                                 await loginProvider.loginWithGoogle();
@@ -92,13 +95,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             else
                               print("TODO MAL!");
                           },
-                          child: const Text(
-                            "Iniciar sesión con Google",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
                         ),
+                        const SizedBox(height: 15),
                         ToggleAuthOption(
                           onTap: () => Navigator.push(
                               context,

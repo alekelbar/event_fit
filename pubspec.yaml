@@ -46,6 +46,7 @@ dependencies:
   permission_handler: ^10.2.0
   provider: ^6.0.5
   google_sign_in: ^6.1.0
+  auth_buttons: ^1.0.1+4
 
 
 dev_dependencies:
