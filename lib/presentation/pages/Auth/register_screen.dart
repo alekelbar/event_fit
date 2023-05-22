@@ -1,8 +1,14 @@
+import 'package:event_fit/presentation/pages/Auth/widgets/confirm_error_dialog.dart';
+import 'package:event_fit/presentation/pages/Auth/widgets/login_button.dart';
+import 'package:event_fit/presentation/pages/Auth/widgets/toggle_auth_option.dart';
+import 'package:event_fit/presentation/providers/user_register_provider.dart';
+import 'package:event_fit/presentation/widgets/shared/custom_loading_screen.dart';
 import 'package:event_fit/presentation/widgets/shared/reusable_widget.dart';
 import 'package:event_fit/presentation/pages/home.dart';
 import 'package:event_fit/presentation/routes/routes_names.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
 class SingUpScreen extends StatefulWidget {
   const SingUpScreen({super.key});
@@ -32,52 +38,18 @@ class SingUpScreenState extends State<SingUpScreen> {
     await showDialog(
         context: context,
         builder: (_) {
-          return Dialog(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      message,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    ElevatedButton(
-                      style: const ButtonStyle(
-                          backgroundColor:
-                              MaterialStatePropertyAll(Colors.green)),
-                      child: const Text(
-                        "OK",
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.w200,
-                          color: Colors.white,
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
+          return ConfirmErrorDialog(
+            context: context,
+            message: message,
           );
         });
   }
 
   @override
   Widget build(BuildContext context) {
+    final registerProvider = context.watch<UserRegisterProvider>();
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: StreamBuilder<User?>(
           stream: FirebaseAuth.instance.authStateChanges(),
@@ -95,14 +67,14 @@ class SingUpScreenState extends State<SingUpScreen> {
             return SafeArea(
               child: Container(
                 alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
+                width: double.infinity,
+                height: double.infinity,
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
                   colors: [Colors.blueGrey.shade500, Colors.green.shade300],
                 )),
                 child: loadingPage
-                    ? const LinearProgressIndicator()
+                    ? const CustomLoadingScreen()
                     : Form(
                         key: _formKey,
                         child: Padding(
@@ -115,9 +87,8 @@ class SingUpScreenState extends State<SingUpScreen> {
                                   Image.asset(
                                     "assets/logo.png",
                                     fit: BoxFit.contain,
-                                    width: MediaQuery.of(context).size.width,
-                                    height:
-                                        MediaQuery.of(context).size.height / 3,
+                                    width: size.width,
+                                    height: size.height / 3,
                                   ),
                                   const SizedBox(
                                     height: 20,
@@ -156,39 +127,17 @@ class SingUpScreenState extends State<SingUpScreen> {
                                   const SizedBox(
                                     height: 20,
                                   ),
-                                  singInsingUpButton(context, false, () async {
-                                    if (!_formKey.currentState!.validate()) {
-                                      return;
-                                    }
-                                    _formKey.currentState!.save();
-
-                                    try {
-                                      await FirebaseAuth.instance
-                                          .createUserWithEmailAndPassword(
-                                        email: _emailTextcontroller.text,
-                                        password: _passwordTextcontroller.text,
-                                      );
-                                    } on FirebaseAuthException catch (e) {
-                                      String errorMessage =
-                                          'Un error desconocido ocurrio.';
-
-                                      if (e.code == 'weak-password') {
-                                        errorMessage =
-                                            'Su contraseña es muy debíl';
-                                      } else if (e.code ==
-                                          'email-already-in-use') {
-                                        errorMessage =
-                                            'El email ya se encuentra registrado';
-                                      }
-
-                                      showError(errorMessage);
-                                    } finally {
-                                      setState(() {
-                                        loadingPage = false;
-                                      });
-                                    }
-                                  }),
-                                  signUpOption()
+                                  AuthButton(
+                                    onPress: () => register(registerProvider),
+                                    type: ButtonTypes.register,
+                                  ),
+                                  ToggleAuthOption(
+                                    text: "¿Todavía no tienes una cuenta?",
+                                    onTap: () => Navigator.pushReplacementNamed(
+                                      context,
+                                      RoutesNames.registerPage,
+                                    ),
+                                  )
                                 ]),
                           ),
                         ),
@@ -199,17 +148,24 @@ class SingUpScreenState extends State<SingUpScreen> {
     );
   }
 
-  Row signUpOption() {
-    return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-      GestureDetector(
-        onTap: () {
-          Navigator.pushReplacementNamed(context, RoutesNames.homePage);
-        },
-        child: const Text(
-          " ¿Ya tienes una cuenta? ",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-      )
-    ]);
+  void register(UserRegisterProvider registerProvider) async {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+    _formKey.currentState!.save();
+
+    final String errorMessage =
+        await registerProvider.registerWithEmailAndPassword(
+      email: _emailTextcontroller.text,
+      password: _passwordTextcontroller.text,
+    );
+
+    if (errorMessage != 'OK') {
+      showError(errorMessage);
+    }
+
+    setState(() {
+      loadingPage = false;
+    });
   }
 }

@@ -1,4 +1,4 @@
-import 'package:event_fit/presentation/pages/Auth/sign_up.dart';
+import 'package:event_fit/presentation/pages/Auth/register_screen.dart';
 import 'package:event_fit/presentation/providers/otp_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

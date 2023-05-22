@@ -1,4 +1,4 @@
-import 'package:event_fit/domain/models/publish.dart';
+import 'package:event_fit/infrastructure/models/publish.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 final List<Publish> publishData = [

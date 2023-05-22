@@ -1,5 +1,4 @@
 import 'package:event_fit/presentation/helpers/go_home.dart';
-import 'package:event_fit/presentation/routes/routes_names.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

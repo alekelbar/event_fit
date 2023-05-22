@@ -1,0 +1,133 @@
+import 'package:event_fit/presentation/pages/Auth/widgets/login_button.dart';
+import 'package:event_fit/presentation/pages/Auth/widgets/toggle_auth_option.dart';
+import 'package:event_fit/presentation/providers/user_login_provider.dart';
+import 'package:event_fit/presentation/pages/Auth/widgets/confirm_error_dialog.dart';
+import 'package:event_fit/presentation/routes/routes_names.dart';
+import 'package:event_fit/presentation/widgets/shared/custom_loading_screen.dart';
+import 'package:event_fit/presentation/widgets/shared/reusable_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _passwordTextcontroller =
+      TextEditingController(text: "alex1234");
+  final TextEditingController _emailTextcontroller =
+      TextEditingController(text: "alekelbar.personal@gmail.com");
+  bool loadingPage = false;
+
+  final _formKey = GlobalKey<FormState>();
+
+  String? validator(value) {
+    if (value == null || value.isEmpty) {
+      return 'El campo es requerido';
+    }
+    return null;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final loginProvider = context.watch<UserLoginProvider>();
+    final size = MediaQuery.of(context).size;
+
+    return Scaffold(
+      body: Container(
+        alignment: Alignment.center,
+        width: size.width,
+        height: size.height,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+          colors: [Colors.blueGrey.shade500, Colors.green.shade300],
+        )),
+        child: loadingPage
+            ? const CustomLoadingScreen()
+            : Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                child: Form(
+                  key: _formKey,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Image.asset(
+                          "assets/logo.png",
+                          fit: BoxFit.contain,
+                          width: size.width,
+                          height: size.height / 3,
+                        ),
+                        reusableTxtfield(
+                          "Usuario",
+                          Icons.person_2_outlined,
+                          false,
+                          _emailTextcontroller,
+                          validator,
+                        ),
+                        const SizedBox(height: 20),
+                        reusableTxtfield(
+                          "Contraseña",
+                          Icons.lock_outline,
+                          true,
+                          _passwordTextcontroller,
+                          validator,
+                        ),
+                        const SizedBox(height: 20),
+                        AuthButton(
+                          type: ButtonTypes.login,
+                          onPress: () => login(loginProvider),
+                        ),
+                        ToggleAuthOption(
+                          onTap: () => Navigator.pushReplacementNamed(
+                              context, RoutesNames.registerPage),
+                          text: "¿Todavía no tienes una cuenta?",
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+      ),
+    );
+  }
+
+  void login(UserLoginProvider loginProvider) async {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+
+    _formKey.currentState!.save();
+    setState(() {
+      loadingPage = true;
+    });
+
+    final String result = await loginProvider.loginWithEmailAndPassword(
+      password: _passwordTextcontroller.text,
+      email: _emailTextcontroller.text,
+    );
+
+    if (result != "OK") {
+      showError(result);
+    }
+
+    setState(() {
+      loadingPage = false;
+    });
+  }
+
+  void showError(String message) async {
+    await showDialog(
+        context: context,
+        builder: (_) {
+          return ConfirmErrorDialog(
+            context: context,
+            message: message,
+          );
+        });
+  }
+}

@@ -1,4 +1,5 @@
 import 'package:event_fit/data/publish_seed.dart';
+import 'package:event_fit/infrastructure/models/publish.dart';
 import 'package:event_fit/presentation/pages/home/publish/publish_buttons.dart';
 import 'package:event_fit/presentation/pages/home/publish/publish_image.dart';
 import 'package:event_fit/presentation/pages/home/publish/publish_text.dart';
@@ -6,7 +7,7 @@ import 'package:flutter/material.dart';
 
 class PublishWall extends StatelessWidget {
   PublishWall({super.key});
-  final publishes = publishData;
+  final List<Publish> publishes = publishData;
 
   @override
   Widget build(BuildContext context) {
