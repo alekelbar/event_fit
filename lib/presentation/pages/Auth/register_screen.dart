@@ -5,19 +5,18 @@ import 'package:event_fit/presentation/providers/user_register_provider.dart';
 import 'package:event_fit/presentation/widgets/shared/custom_loading_screen.dart';
 import 'package:event_fit/presentation/widgets/shared/reusable_widget.dart';
 import 'package:event_fit/presentation/pages/home.dart';
-import 'package:event_fit/presentation/routes/routes_names.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 
-class SingUpScreen extends StatefulWidget {
-  const SingUpScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<SingUpScreen> createState() => SingUpScreenState();
+  State<RegisterScreen> createState() => RegisterScreenState();
 }
 
-class SingUpScreenState extends State<SingUpScreen> {
+class RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _passwordTextcontroller = TextEditingController();
   final TextEditingController _emailTextcontroller = TextEditingController();
   final TextEditingController _confirmPasswordTextcontroller =
@@ -131,12 +130,25 @@ class SingUpScreenState extends State<SingUpScreen> {
                                     onPress: () => register(registerProvider),
                                     type: ButtonTypes.register,
                                   ),
+                                  TextButton(
+                                    onPressed: () async {
+                                      final result = await registerProvider
+                                          .registerWithGoogle();
+                                      if (result != null)
+                                        print("TODO BIEN!");
+                                      else
+                                        print("TODO MAL!");
+                                    },
+                                    child: const Text(
+                                      "Registrarse con Google",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
                                   ToggleAuthOption(
                                     text: "¿Todavía no tienes una cuenta?",
-                                    onTap: () => Navigator.pushReplacementNamed(
-                                      context,
-                                      RoutesNames.registerPage,
-                                    ),
+                                    onTap: () => Navigator.pop(context),
                                   )
                                 ]),
                           ),

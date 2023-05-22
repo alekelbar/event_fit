@@ -1,4 +1,5 @@
 import 'package:event_fit/domain/repositories/firebase_auth_repository.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class UserLoginProvider extends ChangeNotifier {
@@ -13,5 +14,9 @@ class UserLoginProvider extends ChangeNotifier {
 
     notifyListeners();
     return result;
+  }
+
+  Future<UserCredential?> loginWithGoogle() async {
+    return repository.loginGoogle();
   }
 }

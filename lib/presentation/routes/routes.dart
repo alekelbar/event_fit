@@ -8,6 +8,6 @@ import 'package:flutter/material.dart';
 Map<String, WidgetBuilder> routes = {
   RoutesNames.homePage: (context) => const Homescreen(),
   RoutesNames.loginPage: (context) => const LoginScreen(),
-  RoutesNames.registerPage: (context) => const SingUpScreen(),
+  RoutesNames.registerPage: (context) => const RegisterScreen(),
   RoutesNames.mapPage: (context) => const MapScreen(),
 };

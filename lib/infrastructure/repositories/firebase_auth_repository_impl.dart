@@ -1,5 +1,6 @@
 import 'package:event_fit/domain/datasources/firebase_auth_datasource.dart';
 import 'package:event_fit/domain/repositories/firebase_auth_repository.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseAuthRepositoryImpl implements FirebaseAuthRepository {
   final FirebaseAuthDataSource datasource;
@@ -18,5 +19,15 @@ class FirebaseAuthRepositoryImpl implements FirebaseAuthRepository {
       {required String email, required String password}) {
     return datasource.registerWithEmailAndPassword(
         email: email, password: password);
+  }
+
+  @override
+  Future<UserCredential?> registerWithGoogle() {
+    return datasource.registerWithGoogle();
+  }
+
+  @override
+  Future<UserCredential?> loginGoogle() {
+    return datasource.loginWithGoogle();
   }
 }

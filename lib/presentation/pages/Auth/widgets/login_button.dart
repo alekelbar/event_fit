@@ -19,20 +19,22 @@ class AuthButton extends StatelessWidget {
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(90)),
       child: ElevatedButton(
         onPressed: onPress,
-        style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.resolveWith((states) {
-              if (states.contains(MaterialState.pressed)) {
-                return Colors.black26;
-              }
-              return Colors.white;
-            }),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30)))),
+        // style: ButtonStyle(
+        //     backgroundColor: MaterialStateProperty.resolveWith((states) {
+        //       if (states.contains(MaterialState.pressed)) {
+        //         return Colors.black26;
+        //       }
+        //       return Colors.white;
+        //     }),
+        //     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        //         RoundedRectangleBorder(
+        //             borderRadius: BorderRadius.circular(30)))),
         child: Text(
           ButtonTypes.login == type ? "Iniciar Sesión" : "Registrar",
           style: const TextStyle(
-              color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 16),
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
         ),
       ),
     );

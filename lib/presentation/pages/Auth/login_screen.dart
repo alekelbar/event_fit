@@ -1,8 +1,9 @@
+import 'package:event_fit/presentation/pages/Auth/register_screen.dart';
 import 'package:event_fit/presentation/pages/Auth/widgets/login_button.dart';
 import 'package:event_fit/presentation/pages/Auth/widgets/toggle_auth_option.dart';
 import 'package:event_fit/presentation/providers/user_login_provider.dart';
 import 'package:event_fit/presentation/pages/Auth/widgets/confirm_error_dialog.dart';
-import 'package:event_fit/presentation/routes/routes_names.dart';
+import 'package:event_fit/presentation/providers/user_register_provider.dart';
 import 'package:event_fit/presentation/widgets/shared/custom_loading_screen.dart';
 import 'package:event_fit/presentation/widgets/shared/reusable_widget.dart';
 import 'package:flutter/material.dart';
@@ -82,11 +83,35 @@ class _LoginScreenState extends State<LoginScreen> {
                           type: ButtonTypes.login,
                           onPress: () => login(loginProvider),
                         ),
+                        TextButton(
+                          onPressed: () async {
+                            final result =
+                                await loginProvider.loginWithGoogle();
+                            if (result != null)
+                              print("TODO BIEN!");
+                            else
+                              print("TODO MAL!");
+                          },
+                          child: const Text(
+                            "Iniciar sesión con Google",
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
                         ToggleAuthOption(
-                          onTap: () => Navigator.pushReplacementNamed(
-                              context, RoutesNames.registerPage),
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ChangeNotifierProvider(
+                                  create: (context) => UserRegisterProvider(
+                                    repository: loginProvider.repository,
+                                  ),
+                                  child: const RegisterScreen(),
+                                ),
+                              )),
                           text: "¿Todavía no tienes una cuenta?",
-                        )
+                        ),
                       ],
                     ),
                   ),

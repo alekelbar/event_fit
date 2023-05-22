@@ -168,7 +168,7 @@ class OptLocalButtons extends StatelessWidget {
               otpProvider.resetState();
               if (res) {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => const SingUpScreen()));
+                    MaterialPageRoute(builder: (_) => const RegisterScreen()));
               }
             },
             child: const Text(
