@@ -1,4 +1,5 @@
-import 'package:event_fit/presentation/common/widgets/reusable_widget.dart';
+import 'package:event_fit/presentation/widgets/shared/custom_loading_screen.dart';
+import 'package:event_fit/presentation/widgets/shared/reusable_widget.dart';
 import 'package:event_fit/presentation/routes/routes_names.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -86,7 +87,7 @@ class _SingInScreenState extends State<SingInScreen> {
           colors: [Colors.blueGrey.shade500, Colors.green.shade300],
         )),
         child: loadingPage
-            ? const LinearProgressIndicator()
+            ? const CustomLoadingScreen()
             : Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 0),

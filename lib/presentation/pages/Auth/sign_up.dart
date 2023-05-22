@@ -1,5 +1,6 @@
-import 'package:event_fit/presentation/common/widgets/reusable_widget.dart';
+import 'package:event_fit/presentation/widgets/shared/reusable_widget.dart';
 import 'package:event_fit/presentation/pages/home.dart';
+import 'package:event_fit/presentation/routes/routes_names.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -202,8 +203,7 @@ class SingUpScreenState extends State<SingUpScreen> {
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
       GestureDetector(
         onTap: () {
-          Navigator.pop(context,
-              MaterialPageRoute(builder: (context) => const Homescreen()));
+          Navigator.pushReplacementNamed(context, RoutesNames.homePage);
         },
         child: const Text(
           " ¿Ya tienes una cuenta? ",

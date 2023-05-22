@@ -1,5 +1,6 @@
 import 'package:event_fit/presentation/pages/Auth/sing_in.dart';
 import 'package:event_fit/presentation/pages/home/user_page.dart';
+import 'package:event_fit/presentation/widgets/shared/custom_loading_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -12,13 +13,11 @@ class Homescreen extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             // Si estamos esperando una respuesta del servidor de autenticación
-            return const Center(
-              child: LinearProgressIndicator(),
-            );
+            return const CustomLoadingScreen();
           }
 
           if (!snapshot.hasData) {
-            // Si el usuario está autenticado, redirigir a la pantalla de mapa
+            // Si el usuario está autenticado, redirigir a la pantalla de login
             return const SafeArea(child: SingInScreen());
           }
 
