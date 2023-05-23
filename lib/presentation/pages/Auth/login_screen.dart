@@ -86,7 +86,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         GoogleAuthButton(
                           text: 'Iniciar sesión con Google',
-                          style: const AuthButtonStyle(borderRadius: 90),
+                          style: const AuthButtonStyle(
+                            borderRadius: 90,
+                            textStyle:
+                                TextStyle(fontSize: 16, color: Colors.black),
+                          ),
                           onPressed: () async {
                             final result =
                                 await loginProvider.loginWithGoogle();
