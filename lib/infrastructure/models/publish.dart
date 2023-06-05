@@ -5,14 +5,16 @@ class Publish {
   final String name;
   final String siteDescription;
   final String imageUrl;
-  final Type type; // casting for class base
+  final Type type;
+  final int like; // casting for class base
 
   Publish(
       {required this.id,
       required this.name,
       required this.siteDescription,
       required this.imageUrl,
-      required this.type});
+      required this.type,
+      required this.like});
 }
 
 // base for use a type
