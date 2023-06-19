@@ -1,8 +1,6 @@
 import 'package:event_fit/domain/datasources/firebase_auth_datasource.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseAuthDatasourceImpl implements FirebaseAuthDataSource {
   final FirebaseAuth _auth = FirebaseAuth.instance;
