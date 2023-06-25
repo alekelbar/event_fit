@@ -1,6 +1,7 @@
 import 'package:event_fit/presentation/helpers/go_home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -12,6 +13,8 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+
     return Center(
       child: TextButton(
           child: const Text("Salir"),
@@ -19,6 +22,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             bool exit = await onExit();
             if (exit) {
               await FirebaseAuth.instance.signOut();
+              await googleSignIn.signOut();
               logOut();
             }
           }),
