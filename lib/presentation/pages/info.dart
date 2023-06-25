@@ -1,15 +1,16 @@
 import 'package:event_fit/presentation/pages/home.dart';
-import 'package:event_fit/presentation/routes/routes.dart';
 import 'package:event_fit/presentation/routes/routes_names.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class IntroductionScreen extends StatefulWidget {
+  const IntroductionScreen({super.key});
+
   @override
-  _IntroductionScreenState createState() => _IntroductionScreenState();
+  IntroductionScreenState createState() => IntroductionScreenState();
 }
 
-class _IntroductionScreenState extends State<IntroductionScreen> {
+class IntroductionScreenState extends State<IntroductionScreen> {
   final List<String> titles = [
     'Bienvenido',
     'Descubre',

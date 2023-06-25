@@ -94,10 +94,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () async {
                             final result =
                                 await loginProvider.loginWithGoogle();
-                            if (result != null)
-                              print("TODO BIEN!");
-                            else
-                              print("TODO MAL!");
+                            if (result != null) {
+                              debugPrint("TODO BIEN!");
+                            } else {
+                              debugPrint("TODO MAL!");
+                            }
                           },
                         ),
                         const SizedBox(height: 15),

@@ -53,12 +53,6 @@ class RegisterScreenState extends State<RegisterScreen> {
       body: StreamBuilder<User?>(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: LinearProgressIndicator(),
-              );
-            }
-
             if (snapshot.hasData) {
               return const Homescreen();
             }
@@ -134,10 +128,12 @@ class RegisterScreenState extends State<RegisterScreen> {
                                     onPressed: () async {
                                       final result = await registerProvider
                                           .registerWithGoogle();
-                                      if (result != null)
+
+                                      if (result != null) {
                                         print("TODO BIEN!");
-                                      else
+                                      } else {
                                         print("TODO MAL!");
+                                      }
                                     },
                                     child: const Text(
                                       "Registrarse con Google",
@@ -164,7 +160,11 @@ class RegisterScreenState extends State<RegisterScreen> {
     if (!_formKey.currentState!.validate()) {
       return;
     }
+
     _formKey.currentState!.save();
+    setState(() {
+      loadingPage = true;
+    });
 
     final String errorMessage =
         await registerProvider.registerWithEmailAndPassword(
