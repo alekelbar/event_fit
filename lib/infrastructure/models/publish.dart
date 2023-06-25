@@ -2,15 +2,17 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Publish {
   final String id;
-  final String name;
+  final String userId;
+  final String title;
   final String siteDescription;
   final String imageUrl;
-  final Type type;
-  final int like; // casting for class base
+  final Type type; // casting for class base
+  final int like;
 
   Publish(
-      {required this.id,
-      required this.name,
+      {required this.userId,
+      required this.id,
+      required this.title,
       required this.siteDescription,
       required this.imageUrl,
       required this.type,

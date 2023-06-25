@@ -23,7 +23,7 @@ class PublishWall extends StatelessWidget {
               PublishImage(imageUrl: publish.imageUrl),
               const PublishButtons(),
               PublishText(
-                description: publish.name,
+                description: publish.title,
                 name: publish.siteDescription,
               )
             ],

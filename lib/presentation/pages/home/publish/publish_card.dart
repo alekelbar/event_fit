@@ -27,7 +27,7 @@ class PublishCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    publish.name,
+                    publish.title,
                     textAlign: TextAlign.start,
                     style: const TextStyle(
                       fontSize: 25,
