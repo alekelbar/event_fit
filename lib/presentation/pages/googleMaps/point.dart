@@ -318,7 +318,7 @@ class _StepperExampleState extends State<StepperExample> {
             ),
             Step(
               title: const Text('MAPA'),
-              content: Container(
+              content: SizedBox(
                 height: 300,
                 child: Stack(
                   children: [
