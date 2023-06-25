@@ -1,9 +1,10 @@
 import 'package:event_fit/presentation/pages/googleMaps/controllers/map_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import './point.dart';
 
 class MapScreen extends StatefulWidget {
-  const MapScreen({super.key});
+  const MapScreen({Key? key}) : super(key: key);
 
   @override
   MapScreenState createState() => MapScreenState();
@@ -13,9 +14,6 @@ class MapScreenState extends State<MapScreen> {
   final MapController _controller = MapController();
   final Set<Marker> _markers = {};
 
-  String _event = '';
-  String _startsAt = '';
-  String _duration = '';
   bool isHybrid = false;
 
   @override
@@ -34,109 +32,42 @@ class MapScreenState extends State<MapScreen> {
               });
             },
             child: const Icon(Icons.map),
-          )
+          ),
+          const SizedBox(height: 16), // Espacio vertical entre los botones
+          ElevatedButton(
+            style: const ButtonStyle(
+              minimumSize: MaterialStatePropertyAll(Size(70, 60)),
+            ),
+            onPressed: _onButtonPressed,
+            child: const Icon(Icons.add_location_alt_rounded),
+          ),
         ],
       ),
-      body: GoogleMap(
-        onMapCreated: _controller.onMapCreated,
-        initialCameraPosition: const CameraPosition(
-          target: LatLng(8.648997, -82.9436183),
-          zoom: 13,
-        ),
-        markers: _markers,
-        onTap: _onMapTapped,
-        zoomControlsEnabled: false,
-        mapType: isHybrid ? MapType.hybrid : MapType.normal,
-        compassEnabled: true,
-        myLocationButtonEnabled: true,
-        myLocationEnabled: true,
-        zoomGesturesEnabled: true,
+      body: Stack(
+        children: [
+          GoogleMap(
+            onMapCreated: _controller.onMapCreated,
+            initialCameraPosition: const CameraPosition(
+              target: LatLng(8.648997, -82.9436183),
+              zoom: 13,
+            ),
+            markers: _markers,
+            zoomControlsEnabled: false,
+            mapType: isHybrid ? MapType.hybrid : MapType.normal,
+            compassEnabled: true,
+            myLocationButtonEnabled: true,
+            myLocationEnabled: true,
+            zoomGesturesEnabled: true,
+          ),
+        ],
       ),
     );
   }
 
-  void _onMapTapped(LatLng location) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('¡Crea un evento!'),
-        content: SingleChildScrollView(
-          child: Form(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(
-                  child: TextFormField(
-                    decoration: const InputDecoration(labelText: 'Evento'),
-                    onChanged: (value) => _event = value,
-                    style: Theme.of(context).textTheme.bodySmall,
-                    keyboardType: TextInputType.text,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                SizedBox(
-                  child: TextFormField(
-                    decoration:
-                        const InputDecoration(labelText: 'Hora de salida'),
-                    onChanged: (value) => _startsAt = value,
-                    style: Theme.of(context).textTheme.bodySmall,
-                    keyboardType: TextInputType.text,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                SizedBox(
-                  child: TextFormField(
-                    decoration:
-                        const InputDecoration(labelText: 'Tiempo estimado'),
-                    onChanged: (value) => _duration = value,
-                    style: Theme.of(context).textTheme.bodySmall,
-                    keyboardType: TextInputType.text,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Cancelar'),
-          ),
-          TextButton(
-            onPressed: () {
-              setState(() {
-                _markers.add(
-                  Marker(
-                    markerId: MarkerId(location.toString()),
-                    position: location,
-                    infoWindow: InfoWindow(
-                      title: _event,
-                      snippet:
-                          '$_event\nSalida: $_startsAt\nTiempo estimado: $_duration',
-                    ),
-                    onTap: () {
-                      // Mostrar contenido de ventana de información al tocar la marca
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (context) => Container(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Text(
-                            '$_event\n$_event\nSalida: $_startsAt\nTiempo estimado: $_duration',
-                            style: const TextStyle(fontSize: 18.0),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                );
-              });
-              Navigator.of(context).pop();
-            },
-            child: const Text('Agregar'),
-          ),
-        ],
-      ),
+  void _onButtonPressed() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const StepperExampleApp()),
     );
   }
 }
