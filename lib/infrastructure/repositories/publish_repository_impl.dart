@@ -33,7 +33,7 @@ class PublishRepositoryImpl extends PublishRepository {
   }
 
   @override
-  Future<Publish> updatePublish({required Publish publish}) {
+  Future<Publish?> updatePublish({required Publish publish}) {
     return datasource.updatePublish(publish: publish);
   }
 }

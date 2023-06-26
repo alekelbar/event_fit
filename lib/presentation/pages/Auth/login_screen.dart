@@ -1,4 +1,5 @@
 import 'package:event_fit/infrastructure/datasources/publish_datasource_impl.dart';
+import 'package:event_fit/infrastructure/models/publish.dart';
 import 'package:event_fit/infrastructure/repositories/publish_repository_impl.dart';
 import 'package:event_fit/presentation/pages/Auth/register_screen.dart';
 import 'package:event_fit/presentation/pages/Auth/widgets/login_button.dart';
@@ -9,6 +10,7 @@ import 'package:event_fit/presentation/providers/user_register_provider.dart';
 import 'package:event_fit/presentation/widgets/shared/custom_loading_screen.dart';
 import 'package:event_fit/presentation/widgets/shared/reusable_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:auth_buttons/auth_buttons.dart';
 
@@ -37,28 +39,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final loginProvider = context.watch<UserLoginProvider>();
     final size = MediaQuery.of(context).size;
-
-    PublishRepositoryImpl repo =
-        PublishRepositoryImpl(datasource: PublishDatasourceImpl());
-
-    print("\nhello world!\n");
-
-    // repo.createPublish(
-    //     publish: Publish(
-    //         id: "",
-    //         like: 0,
-    //         userId: "#001",
-    //         title: "¡De paseo!",
-    //         siteDescription: "En una playa de méxico",
-    //         imageUrl:
-    //             "https://th.bing.com/th/id/OIP.kledA06j2arvt0d3ndXciAHaNK?pid=ImgDet&rs=1",
-    //         pointOne: const LatLng(100, 100),
-    //         pointTwo: const LatLng(100, 100)));
-
-    // final list = repo.readPublishes();
-    // final list = repo.readPublishById(id: "I03sopkgKjdw8aMlqOlv");
-    // final list = repo.readPublishByUserId(userId: "#001");
-    // final list = repo.removePublish(id: "I03sopkgKjdw8aMlqOlv");
 
     return Scaffold(
       body: Container(

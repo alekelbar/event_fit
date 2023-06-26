@@ -8,7 +8,7 @@ abstract class PublishRepository {
   Future<Publish?> readPublishById({required String id});
   Future<List<Publish>> readPublishByUserId({required String userId});
   // U
-  Future<Publish> updatePublish({required Publish publish});
+  Future<Publish?> updatePublish({required Publish publish});
   // D
   Future<Publish?> removePublish({required String id});
 }

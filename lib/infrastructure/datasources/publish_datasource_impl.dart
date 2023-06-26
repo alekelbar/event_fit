@@ -46,7 +46,6 @@ class PublishDatasourceImpl extends PublishDatasource {
 
     return querySnap.docs.map((doc) {
       final data = doc.data();
-      print(data);
       return Publish.fromJson(data);
     }).toList();
   }
@@ -63,13 +62,21 @@ class PublishDatasourceImpl extends PublishDatasource {
     }
 
     docRef.delete();
-    print(querySnap.data());
     return Publish.fromJson(querySnap.data()!);
   }
 
   @override
-  Future<Publish> updatePublish({required Publish publish}) async {
-    // TODO: implement updatePublish
-    throw UnimplementedError();
+  Future<Publish?> updatePublish({required Publish publish}) async {
+    final docRef = _firestore.collection("publishes").doc(publish.id);
+
+    final querySnap = await docRef.get();
+
+    // verificar que exista la publicación
+    if (!querySnap.exists) {
+      return null;
+    }
+
+    docRef.update(publish.getMapper());
+    return Publish.fromJson(querySnap.data()!);
   }
 }
