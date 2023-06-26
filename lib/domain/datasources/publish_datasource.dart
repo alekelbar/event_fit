@@ -6,7 +6,7 @@ abstract class PublishDatasource {
   // R
   Future<List<Publish>> readPublishes();
   Future<Publish?> readPublishById({required String id});
-  Future<Publish> readPublishByUserId({required Publish publish});
+  Future<List<Publish>> readPublishByUserId({required String userId});
   // U
   Future<Publish> updatePublish({required Publish publish});
   // D

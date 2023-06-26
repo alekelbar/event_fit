@@ -23,8 +23,8 @@ class PublishRepositoryImpl extends PublishRepository {
   }
 
   @override
-  Future<Publish> readPublishByUserId({required Publish publish}) {
-    return datasource.readPublishByUserId(publish: publish);
+  Future<List<Publish>> readPublishByUserId({required String userId}) {
+    return datasource.readPublishByUserId(userId: userId);
   }
 
   @override
