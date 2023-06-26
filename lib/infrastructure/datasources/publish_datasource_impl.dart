@@ -1,41 +1,43 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:event_fit/domain/datasources/publish_datasource.dart';
 import 'package:event_fit/infrastructure/models/publish.dart';
 
 class PublishDatasourceImpl extends PublishDatasource {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   @override
-  Publish createPublish({required Publish publish}) {
-    // TODO: implement createPublish
-    throw UnimplementedError();
+  Future<Publish> createPublish({required Publish publish}) async {
+    await _firestore.collection("publishes").doc().set(publish.getMapper());
+    return publish;
   }
 
   @override
-  Publish readPublish({required Publish publish}) {
+  Future<Publish> readPublish({required Publish publish}) async {
     // TODO: implement readPublish
     throw UnimplementedError();
   }
 
   @override
-  Publish readPublishById({required Publish publish}) {
+  Future<Publish> readPublishById({required Publish publish}) async {
     // TODO: implement readPublishById
     throw UnimplementedError();
   }
 
   @override
-  Publish readPublishByUserId({required Publish publish}) {
+  Future<Publish> readPublishByUserId({required Publish publish}) async {
     // TODO: implement readPublishByUserId
     throw UnimplementedError();
   }
 
   @override
-  Publish removePublish({required Publish publish}) {
+  Future<Publish> removePublish({required Publish publish}) async {
     // TODO: implement removePublish
     throw UnimplementedError();
   }
 
   @override
-  Publish updatePublish({required Publish publish}) {
+  Future<Publish> updatePublish({required Publish publish}) async {
     // TODO: implement updatePublish
     throw UnimplementedError();
   }
-
 }

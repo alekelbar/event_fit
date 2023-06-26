@@ -1,3 +1,6 @@
+import 'package:event_fit/infrastructure/datasources/publish_datasource_impl.dart';
+import 'package:event_fit/infrastructure/models/publish.dart';
+import 'package:event_fit/infrastructure/repositories/publish_repository_impl.dart';
 import 'package:event_fit/presentation/pages/Auth/register_screen.dart';
 import 'package:event_fit/presentation/pages/Auth/widgets/login_button.dart';
 import 'package:event_fit/presentation/pages/Auth/widgets/toggle_auth_option.dart';
@@ -7,6 +10,7 @@ import 'package:event_fit/presentation/providers/user_register_provider.dart';
 import 'package:event_fit/presentation/widgets/shared/custom_loading_screen.dart';
 import 'package:event_fit/presentation/widgets/shared/reusable_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:auth_buttons/auth_buttons.dart';
 

@@ -8,32 +8,32 @@ class PublishRepositoryImpl extends PublishRepository {
   PublishRepositoryImpl({required this.datasource});
 
   @override
-  Publish createPublish({required Publish publish}) {
+  Future<Publish> createPublish({required Publish publish}) {
     return datasource.createPublish(publish: publish);
   }
 
   @override
-  Publish readPublish({required Publish publish}) {
+  Future<Publish> readPublish({required Publish publish}) {
     return datasource.readPublish(publish: publish);
   }
 
   @override
-  Publish readPublishById({required Publish publish}) {
+  Future<Publish> readPublishById({required Publish publish}) {
     return datasource.readPublishById(publish: publish);
   }
 
   @override
-  Publish readPublishByUserId({required Publish publish}) {
+  Future<Publish> readPublishByUserId({required Publish publish}) {
     return datasource.readPublishByUserId(publish: publish);
   }
 
   @override
-  Publish removePublish({required Publish publish}) {
+  Future<Publish> removePublish({required Publish publish}) {
     return datasource.removePublish(publish: publish);
   }
 
   @override
-  Publish updatePublish({required Publish publish}) {
+  Future<Publish> updatePublish({required Publish publish}) {
     return datasource.updatePublish(publish: publish);
   }
 }
