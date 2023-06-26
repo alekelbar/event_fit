@@ -7,8 +7,14 @@ class PublishDatasourceImpl extends PublishDatasource {
 
   @override
   Future<Publish> createPublish({required Publish publish}) async {
-    await _firestore.collection("publishes").doc().set(publish.getMapper());
-    return publish;
+    final docRef =
+        await _firestore.collection("publishes").add(publish.getMapper());
+    // Actualizar el objeto
+    final updatedPublish = publish.copyWith(id: docRef.id);
+    // actualizar en firebase
+    await docRef.set(updatedPublish.getMapper());
+
+    return updatedPublish;
   }
 
   @override

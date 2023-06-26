@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Publish {
+  final String id;
   final String userId;
   final String title;
   final String siteDescription;
@@ -11,6 +12,7 @@ class Publish {
   final int like;
 
   Publish({
+    required this.id,
     required this.userId,
     required this.title,
     required this.siteDescription,
@@ -20,8 +22,31 @@ class Publish {
     this.pointTwo,
   });
 
+  Publish copyWith({
+    String? id,
+    String? userId,
+    String? title,
+    String? siteDescription,
+    String? imageUrl,
+    LatLng? pointOne,
+    LatLng? pointTwo,
+    int? like,
+  }) {
+    return Publish(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      title: title ?? this.title,
+      siteDescription: siteDescription ?? this.siteDescription,
+      imageUrl: imageUrl ?? this.imageUrl,
+      pointOne: pointOne ?? this.pointOne,
+      pointTwo: pointTwo ?? this.pointTwo,
+      like: like ?? this.like,
+    );
+  }
+
   Map<String, dynamic> getMapper() {
     return {
+      "id": id,
       "userId": userId,
       "title": title,
       "siteDescription": siteDescription,

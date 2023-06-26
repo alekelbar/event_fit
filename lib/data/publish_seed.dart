@@ -3,6 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 final List<Publish> publishData = [
   Publish(
+      id: "",
       pointOne: const LatLng(100, 100),
       pointTwo: const LatLng(100, 100),
       userId: "#001",
@@ -12,6 +13,7 @@ final List<Publish> publishData = [
           "https://th.bing.com/th/id/OIP.kledA06j2arvt0d3ndXciAHaNK?pid=ImgDet&rs=1",
       like: 0),
   Publish(
+      id: "",
       userId: "#002",
       title: "¡Increible!",
       siteDescription: "Visitando un lugar de ensueño",
@@ -21,6 +23,7 @@ final List<Publish> publishData = [
       pointTwo: const LatLng(100, 100),
       like: 0),
   Publish(
+      id: "",
       userId: "#003",
       title: "De pelicula",
       siteDescription: "el agua parece un cristal",
@@ -30,6 +33,7 @@ final List<Publish> publishData = [
       pointTwo: const LatLng(100, 100),
       like: 0),
   Publish(
+      id: "",
       userId: "#004",
       title: "¿Te vienes?",
       siteDescription: "Un tranquilo día de pesca",
@@ -38,6 +42,7 @@ final List<Publish> publishData = [
       pointTwo: const LatLng(100, 100),
       like: 0),
   Publish(
+      id: "",
       userId: "#005",
       title: "El atardecer",
       siteDescription: "No hay mejor momento para relajarse",
@@ -47,6 +52,7 @@ final List<Publish> publishData = [
       pointTwo: const LatLng(100, 100),
       like: 0),
   Publish(
+      id: "",
       userId: "#006",
       title: "¿Viste?",
       siteDescription:
