@@ -22,6 +22,16 @@ class Publish {
     this.pointTwo,
   });
 
+  Publish.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        userId = json['userId'],
+        title = json['title'],
+        siteDescription = json['siteDescription'],
+        imageUrl = json['imageUrl'],
+        like = json['like'],
+        pointOne = Publish._latLngFromGeoPoint(json['pointOne']),
+        pointTwo = Publish._latLngFromGeoPoint(json['pointTwo']);
+
   Publish copyWith({
     String? id,
     String? userId,

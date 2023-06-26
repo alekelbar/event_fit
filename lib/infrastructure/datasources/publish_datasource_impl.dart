@@ -18,15 +18,23 @@ class PublishDatasourceImpl extends PublishDatasource {
   }
 
   @override
-  Future<Publish> readPublish({required Publish publish}) async {
-    // TODO: implement readPublish
-    throw UnimplementedError();
+  Future<List<Publish>> readPublishes() async {
+    final querySnap = await _firestore.collection("publishes").get();
+    return querySnap.docs.map((doc) {
+      final data = doc.data();
+      return Publish.fromJson(data);
+    }).toList();
   }
 
   @override
-  Future<Publish> readPublishById({required Publish publish}) async {
-    // TODO: implement readPublishById
-    throw UnimplementedError();
+  Future<Publish?> readPublishById({required String id}) async {
+    final querySnap = await _firestore.collection("publishes").doc(id).get();
+    if (!querySnap.exists) {
+      return null;
+    }
+
+    final data = querySnap.data();
+    return Publish.fromJson(data!);
   }
 
   @override

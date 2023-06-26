@@ -40,10 +40,10 @@ class _LoginScreenState extends State<LoginScreen> {
     final loginProvider = context.watch<UserLoginProvider>();
     final size = MediaQuery.of(context).size;
 
-    // PublishRepositoryImpl repo =
-    //     PublishRepositoryImpl(datasource: PublishDatasourceImpl());
+    PublishRepositoryImpl repo =
+        PublishRepositoryImpl(datasource: PublishDatasourceImpl());
 
-    // print("\nhello world!\n");
+    print("\nhello world!\n");
 
     // repo.createPublish(
     //     publish: Publish(
@@ -56,6 +56,8 @@ class _LoginScreenState extends State<LoginScreen> {
     //             "https://th.bing.com/th/id/OIP.kledA06j2arvt0d3ndXciAHaNK?pid=ImgDet&rs=1",
     //         pointOne: const LatLng(100, 100),
     //         pointTwo: const LatLng(100, 100)));
+
+    // final list = repo.readPublishes();
 
     return Scaffold(
       body: Container(

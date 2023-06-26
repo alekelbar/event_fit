@@ -4,8 +4,8 @@ abstract class PublishRepository {
   // C
   Future<Publish> createPublish({required Publish publish});
   // R
-  Future<Publish> readPublish({required Publish publish});
-  Future<Publish> readPublishById({required Publish publish});
+  Future<List<Publish>> readPublishes();
+  Future<Publish?> readPublishById({required String id});
   Future<Publish> readPublishByUserId({required Publish publish});
   // U
   Future<Publish> updatePublish({required Publish publish});
