@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:event_fit/presentation/pages/googleMaps/controllers/map_controller.dart';
-import './map.dart';
 
 class StepperExampleApp extends StatelessWidget {
   const StepperExampleApp({Key? key}) : super(key: key);

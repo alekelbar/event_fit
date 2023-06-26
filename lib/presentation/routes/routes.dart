@@ -7,7 +7,7 @@ import 'package:event_fit/presentation/pages/info.dart';
 import 'package:flutter/material.dart';
 
 Map<String, WidgetBuilder> routes = {
-  RoutesNames.info: (context) => IntroductionScreen(),
+  RoutesNames.info: (context) => const IntroductionScreen(),
   RoutesNames.homePage: (context) => const Homescreen(),
   RoutesNames.loginPage: (context) => const LoginScreen(),
   RoutesNames.registerPage: (context) => const RegisterScreen(),
