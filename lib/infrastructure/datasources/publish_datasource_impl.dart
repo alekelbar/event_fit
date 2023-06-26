@@ -52,9 +52,19 @@ class PublishDatasourceImpl extends PublishDatasource {
   }
 
   @override
-  Future<Publish> removePublish({required Publish publish}) async {
-    // TODO: implement removePublish
-    throw UnimplementedError();
+  Future<Publish?> removePublish({required String id}) async {
+    final docRef = _firestore.collection("publishes").doc(id);
+
+    final querySnap = await docRef.get();
+
+    // verificar que exista la publicación
+    if (!querySnap.exists) {
+      return null;
+    }
+
+    docRef.delete();
+    print(querySnap.data());
+    return Publish.fromJson(querySnap.data()!);
   }
 
   @override

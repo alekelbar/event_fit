@@ -28,8 +28,8 @@ class PublishRepositoryImpl extends PublishRepository {
   }
 
   @override
-  Future<Publish> removePublish({required Publish publish}) {
-    return datasource.removePublish(publish: publish);
+  Future<Publish?> removePublish({required String id}) {
+    return datasource.removePublish(id: id);
   }
 
   @override

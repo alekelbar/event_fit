@@ -10,5 +10,5 @@ abstract class PublishDatasource {
   // U
   Future<Publish> updatePublish({required Publish publish});
   // D
-  Future<Publish> removePublish({required Publish publish});
+  Future<Publish?> removePublish({required String id});
 }

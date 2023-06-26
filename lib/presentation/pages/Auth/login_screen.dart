@@ -58,6 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
     // final list = repo.readPublishes();
     // final list = repo.readPublishById(id: "I03sopkgKjdw8aMlqOlv");
     // final list = repo.readPublishByUserId(userId: "#001");
+    // final list = repo.removePublish(id: "I03sopkgKjdw8aMlqOlv");
 
     return Scaffold(
       body: Container(
