@@ -58,6 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
     //         pointTwo: const LatLng(100, 100)));
 
     // final list = repo.readPublishes();
+    final list = repo.readPublishById(id: "I03sopkgKjdw8aMlqOlv");
 
     return Scaffold(
       body: Container(
