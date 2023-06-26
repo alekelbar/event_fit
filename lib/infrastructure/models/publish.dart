@@ -7,10 +7,12 @@ class Publish {
   final String siteDescription;
   final String imageUrl;
   final Type type; // casting for class base
+  final int typeNumber; // one, SimpleEvent, or two Dinamyc
   final int like;
 
   Publish(
-      {required this.userId,
+      {required this.typeNumber,
+      required this.userId,
       required this.id,
       required this.title,
       required this.siteDescription,
